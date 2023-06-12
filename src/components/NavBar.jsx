@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <div className="flex items-center justify-between p-5">
       <img src={logo} alt="logo" />
-      <div className="flex items-center">
+      <div className="flex items-center dark:bg-dark-primary">
         {/* Dropdown Menu */}
         <Dropdown />
         {/* Theme Toggle */}
