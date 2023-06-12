@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 
 const useDictonary = (word) => {
@@ -6,6 +5,7 @@ const useDictonary = (word) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -22,7 +22,7 @@ const useDictonary = (word) => {
                 setLoading(false);
             }
         }
-        fetchData();
+        fetchData()
     }, [word])
 
   return [ loading, data, error ]
