@@ -13,6 +13,7 @@ import {
   OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
+import { useDarkMode } from "../DarkModeContext";
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState("");
@@ -20,6 +21,10 @@ const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [loading, data, error] = useDictonary(searchTerm);
+  const { darkMode } = useDarkMode();
+
+  const switchColor = darkMode ? "white" : "black";
+  
 
   const handleClick = () => {
     setSearchTerm(inputValue);
@@ -53,6 +58,7 @@ const SearchBar = () => {
             h="1.75rem"
             onClick={handleClick}
             size="sm"
+            color={switchColor}
             sx={{ bg: "transparent", _hover: { color: "purple" } }}
           >
             <SearchIcon />
@@ -89,7 +95,7 @@ const SearchBar = () => {
                       <div>
                         <p className="mb-4 text-light-grey-light">Meaning</p>
 
-                        <UnorderedList>
+                        <UnorderedList p="10px">
                           {meaning.definitions.map((def, index) => {
                             return (
                               <ListItem key={index} color="#A445ED">

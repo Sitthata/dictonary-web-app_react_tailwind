@@ -5,7 +5,8 @@ import FontProvider from "./FontProvider";
 import { useContext } from "react";
 import { FontContext } from "./FontContext";
 import { DarkMode } from "@chakra-ui/react";
-import { DarkModeProvider } from "./DarkModeContext";
+import { DarkModeProvider, useDarkMode } from "./DarkModeContext";
+
 
 function App() {
   const fontMapping = {
@@ -15,7 +16,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-light dark:bg-dark-primary dark:text-white">
+    <div className="w-screen min-h-screen pb-10 bg-light dark:bg-dark-primary dark:text-white">
       <DarkModeProvider>
         <FontProvider>
           <AppContent fontMapping={fontMapping} />
