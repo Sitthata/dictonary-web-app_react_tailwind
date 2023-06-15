@@ -37,10 +37,28 @@ const Dropdown = () => {
       >
         {selectedItem}
       </MenuButton>
-      <MenuList color={switchColor}>
-        <MenuItem onClick={handleMenuItemClick}>San Serif</MenuItem>
-        <MenuItem onClick={handleMenuItemClick}>Serif</MenuItem>
-        <MenuItem onClick={handleMenuItemClick}>Mono</MenuItem>
+      <MenuList color={switchColor} bg={switchBgColor}>
+        <MenuItem
+          color={switchColor}
+          bg={switchBgColor}
+          onClick={handleMenuItemClick}
+        >
+          San Serif
+        </MenuItem>
+        <MenuItem
+          color={switchColor}
+          bg={switchBgColor}
+          onClick={handleMenuItemClick}
+        >
+          Serif
+        </MenuItem>
+        <MenuItem
+          color={switchColor}
+          bg={switchBgColor}
+          onClick={handleMenuItemClick}
+        >
+          Mono
+        </MenuItem>
       </MenuList>
     </Menu>
   );

@@ -16,13 +16,17 @@ const useDictonary = (word) => {
                 }
                 const data = await response.json();
                 setData(data);
+                setError(null);
             } catch (error) {
-                setError(error);   
+                setError(error);  
+                setData(null); 
             } finally {
                 setLoading(false);
             }
         }
-        fetchData()
+        if (word !== "") {
+            fetchData();
+        }
     }, [word])
 
   return [ loading, data, error ]

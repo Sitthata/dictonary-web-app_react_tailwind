@@ -1,14 +1,18 @@
 {
+  "homepage": "https://sitthata.github.io/dictonary-web-app_react_tailwind/",
   "name": "dictonary-web-app_react_tailwind",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run tailwind-build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "tailwind": "npx tailwindcss -i ./src/styles/input.css -o ./dist/output.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/styles/input.css -o ./dist/output.css --watch",
+    "tailwind-build" : "npx tailwindcss -i ./src/styles/input.css -o ./dist/output.css"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
@@ -30,6 +34,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "gh-pages": "^5.0.0",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
   }

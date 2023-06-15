@@ -22,15 +22,16 @@ const SearchBar = () => {
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [loading, data, error] = useDictonary(searchTerm);
   const { darkMode } = useDarkMode();
+  const [errorState, setErrorState] = useState(null);
 
   const switchColor = darkMode ? "white" : "black";
-  
 
   const handleClick = () => {
-    setSearchTerm(inputValue);
-    setSearchResults([]);
-    setSearchAttempted(true);
-    console.log(searchResults);
+    if (inputValue.trim() !== "") {
+      setSearchTerm(inputValue);
+      setSearchResults([]);
+      setSearchAttempted(true);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -40,8 +41,12 @@ const SearchBar = () => {
   useEffect(() => {
     if (data) {
       setSearchResults(data);
+      setErrorState(null);
+    } else if (error) {
+      setSearchResults([]);
+      setErrorState(error);
     }
-  }, [data]);
+  }, [data, error]);
 
   return (
     <div className="mx-5 dark:bg-dark-primary">
@@ -50,13 +55,17 @@ const SearchBar = () => {
           pr="4.5rem"
           borderRadius="1rem"
           value={inputValue}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleClick();
+            }
+          }}
           onChange={handleInputChange}
           placeholder="Enter any word to search..."
         />
         <InputRightElement width="4.5rem">
           <Button
             h="1.75rem"
-            onClick={handleClick}
             size="sm"
             color={switchColor}
             sx={{ bg: "transparent", _hover: { color: "purple" } }}
@@ -68,14 +77,10 @@ const SearchBar = () => {
 
       {/* Conditionally render the extracted part only if search results exist */}
       <div className="mb-10 dark:text-white">
-        {loading ? (
-          <p>Loading...</p>
-        ) : searchAttempted ? (
-          searchResults.length > 0 ? (
-            <ResultHeader searchResults={searchResults} />
-          ) : (
-            <ErrorComponent />
-          )
+        {errorState ? (
+          <ErrorComponent />
+        ) : searchResults.length > 0 ? (
+          <ResultHeader searchResults={searchResults} />
         ) : null}
 
         {searchResults.length > 0 &&
